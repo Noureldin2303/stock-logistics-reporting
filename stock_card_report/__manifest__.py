@@ -1,6 +1,8 @@
 # Copyright 2019 Ecosoft Co., Ltd. (http://ecosoft.co.th)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+# pylint: disable=manifest-required-author,license-allowed
+
 {
     "name": "Stock Card Report",
     "summary": "Add stock card report on Inventory Reporting.",

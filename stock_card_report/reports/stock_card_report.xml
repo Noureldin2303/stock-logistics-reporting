@@ -59,6 +59,7 @@
                     />
           <div class="act_as_row lines">
             <div class="act_as_cell" />
+            <div class="act_as_cell" />
             <div class="act_as_cell">Initial</div>
             <div class="act_as_cell" />
             <div class="act_as_cell" />
@@ -78,6 +79,16 @@
                         />
             <t t-call="stock_card_report.report_stock_card_lines" />
           </t>
+                      <div class="act_as_row lines">
+                        <div class="act_as_cell" />
+                        <div class="act_as_cell" />
+                        <div class="act_as_cell">Closing</div>
+                        <div class="act_as_cell" />
+                        <div class="act_as_cell" />
+                        <div class="act_as_cell right">
+                          <t t-out="'{0:,.3f}'.format(product_balance)" />
+                        </div>
+                      </div>
         </div>
         <p style="page-break-before:always;" />
       </div>
@@ -89,6 +100,7 @@
       <div class="act_as_row labels">
         <div class="act_as_cell">Date From</div>
         <div class="act_as_cell">Date To</div>
+        <div class="act_as_cell">Sales Price</div>
         <div class="act_as_cell">Location</div>
       </div>
       <div class="act_as_row">
@@ -99,7 +111,16 @@
           <span t-field="o.date_to" />
         </div>
         <div class="act_as_cell">
-          <span t-field="o.location_id" />
+          <span t-field="product.list_price" />
+        </div>
+        <div class="act_as_cell">
+          <t t-if="o.all_locations">All Stock Locations</t>
+          <t t-else="">
+            <t t-foreach="o.location_ids" t-as="location">
+              <span t-field="location.display_name" />
+              <t t-if="not location_last">, </t>
+            </t>
+          </t>
         </div>
       </div>
     </div>
@@ -109,6 +130,7 @@
     <div class="act_as_thead">
       <div class="act_as_row labels">
         <div class="act_as_cell">Date</div>
+        <div class="act_as_cell">Cost</div>
         <div class="act_as_cell">Reference</div>
         <div class="act_as_cell">In</div>
         <div class="act_as_cell">Out</div>
@@ -121,6 +143,9 @@
     <div class="act_as_row lines">
       <div class="act_as_cell left">
         <t t-out="product_line.date.strftime('%Y-%m-%d')" />
+      </div>
+      <div class="act_as_cell right">
+        <t t-out="product_line.product_price" />
       </div>
       <div class="act_as_cell left">
         <t t-out="product_line.display_name" />
